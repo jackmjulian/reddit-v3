@@ -1,0 +1,67 @@
+.subreddits-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+* {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.subreddits {
+  text-align: center;
+}
+
+img {
+  height: 2rem;
+  margin: 0.5rem;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+button:hover {
+  background-color: #dadce0;
+  transition: 0.2s;
+}
+
+button:focus {
+  background-color: #dadce0;
+  outline-style: none;
+  /* outline-color: coral; */
+}
+
+button:active {
+  background-color: coral;
+  transform: scale(0.98);
+}
+
+.subreddit-icon {
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 1100px) {
+  .subreddit-title {
+    font-size: 0.5rem;
+  }
+
+  .subreddits {
+    font-size: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .subreddit-title {
+    display: none;
+  }
+
+  button {
+    justify-content: center;
+    overflow: hidden;
+  }
+}

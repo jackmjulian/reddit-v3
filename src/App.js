@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./containers/Header";
+import AllPosts from "./containers/AllPosts";
+import PostDetails from "./containers/PostDetails";
+import Subreddits from "./containers/Subreddits";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header />
+        <div className="main-aside">
+          <div className="main">
+            <Routes>
+              <Route path="/" element={<AllPosts />} />
+              <Route path="/:subreddit" element={<AllPosts />} />
+              <Route path="/:subreddit/:id" element={<PostDetails />} />
+              <Route>404 Not Found!</Route>
+            </Routes>
+          </div>
+          <aside>
+            <Subreddits />
+          </aside>
+        </div>
+      </Router>
     </div>
   );
 }

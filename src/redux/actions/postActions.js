@@ -7,7 +7,7 @@ export const setPosts = (posts) => {
     }
 };
 
-export const selectedPost = (post) => {
+export const selectedPost = (id) => {
     return {
         type: ActionTypes.SELECTED_POST,
         payload: post,

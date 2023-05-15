@@ -5,6 +5,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectedPost } from "../redux/actions/postActions";
 
 const PostDetails = () => {
+  const dispatch = useDispatch();
+
+ const {id} = useParams();
+
+  const selected_post = useSelector((state) => {return state.selected_post});
+
+
+  const fetchComments = async (permalink) => {
+    console.log(permalink);
+    const response = await axios
+      .get(
+        "https://www.reddit.com/r/DestinyFashion/comments/13gx5l2/i_am_coping_hard_trying_to_make_this_thing_work/.json"
+      )
+      .catch((err) => {
+        console.error("err", err);
+      });
+    console.log("guess", response.data[1].data.children);
+    dispatch(selectedPost(response.data[1].data.children));
+    let comments = response.data[1].data.children;
+    const commentList = comments.map((comment) => {
+      const { author, body } = comment.data;
+      console.log("author", author);
+      console.log("body", body);
+    });
+  };
+
+  useEffect(() => {
+    dispatch(selectedPost(id));
+    fetchComments(selected_post.permalink);
+  }, [dispatch, fetchComments]);
 
   return (
     <div>
@@ -15,44 +45,34 @@ const PostDetails = () => {
 
 export default PostDetails;
 
-// Old Api
-// const post = useSelector((state) => state.post);
-//   const { postId } = useParams();
-//   const dispatch = useDispatch();
-//   console.log("postId", postId);
-//   console.log("post", post);
-
-//   const fetchPostComments = async (permalink) => {
-//     const response = await axios
-//       .get(`https://www.reddit.com${permalink}.json`)
-//       .catch((err) => {
-//         console.log("err", err);
-//       });
-//     dispatch(selectedPost(response));
-//   };
-
-//   useEffect(() => {
-//     if (postId && postId !== "") fetchPostComments();
-//   }, [postId]);
-
-
-
-// Old Api v2
-// let {subreddit} = useParams();
-// let {id} = useParams();
-
-// const posts = useSelector((state) => state);
-
-// const fetchPostComments = async () => {
-
-//   const response = await axios
-//     .get(`https://www.reddit.com/r/${subreddit}/comments/${id}`)
-//     .catch((err) => {
-//       console.log("There is an error fetching comments", err);
-//     });
-//   console.log(response);
-// };
-
-// useEffect(() => {
-//   fetchPostComments();
-// }, [id]);
+// Below is the sample setup for the post/comment section
+// return (
+//   <div className="post-article">
+//     <div className="article">
+//       <div className="post-wrap">
+//         <div className="post-container">
+//           <h3 className="post-title">{title}</h3>
+//           <div className="post-image-container">
+//             <img
+//               className="post-img"
+//               src={url}
+//               alt={`r/${subreddit} - ${title}`}
+//             />
+//           </div>
+//           <h3>Comment Section</h3>
+//           <div className="comment-main">
+//             <div className="comment-header">
+//               <img
+//                 className="comment-avatar"
+//                 src="../images/redditlogo.png"
+//                 alt=""
+//               />
+//               <h4>{author}</h4>
+//             </div>
+//           </div>
+//           <div className="post-comments">Comment Body</div>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// );

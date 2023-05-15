@@ -19,15 +19,15 @@ const AllPosts = () => {
         console.error("err", err);
       });
     dispatch(setPosts(response.data.data.children));
-    console.log(response.data.data.children.permalink);
-    console.log(response.data.data.children[0].data.url);
+    // console.log(response.data.data.children.permalink);
+    // console.log(response.data.data.children[0].data.url);
   };
 
   useEffect(() => {
     fetchSubredditPosts(subreddit);
   }, [subreddit]);
 
-  console.log("Posts:", posts);
+  // console.log("Posts:", posts);
 
   return (
     <div>

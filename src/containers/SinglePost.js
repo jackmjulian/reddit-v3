@@ -17,7 +17,7 @@ const SinglePost = () => {
       num_comments,
       permalink,
     } = post.data;
-    console.log("newPost", post);
+    // console.log("newPost", post);
 
     return (
       <div className="article">

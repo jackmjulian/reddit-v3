@@ -2,6 +2,7 @@ import { ActionTypes } from "../constants/action-types";
 
 const initialState = {
   posts: [],
+  selected_post:{},
 };
 
 export const postReducer = (state = initialState, { type, payload }) => {
